@@ -1,0 +1,14 @@
+<!--Title of page-->
+<app-title [title]="'Localization'" [type]="'list'"></app-title>
+<!--End title of page-->
+<!-- START CONTENT FRAME TOP -->
+<div class="content-frame-top">
+    <div class="pull-right">
+        <a routerLink="addlanguage" class="btn btn-default"><span class="fa fa-plus"></span> Add language</a>
+    </div>
+</div>
+<!-- END CONTENT FRAME TOP -->
+
+<!--List for-->
+<table-dinamic [options]="options"></table-dinamic>
+<!--End list for-->

@@ -1,0 +1,25 @@
+{
+  "name": "st.test.api",
+  "description": "",
+  "main": "src/main.ts",
+  "authors": [
+    "soft-tehnica"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "2.2.1",
+    "bootstrap": "3.3.0",
+    "font-awesome": "4.0.3",
+    "jquery-ui": "1.11.0"
+  }
+}

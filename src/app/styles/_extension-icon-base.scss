@@ -1,0 +1,22 @@
+.extension-icon-background {
+  background-size: contain;
+  background-position: 50%;
+  background-repeat: no-repeat;
+}
+
+.extension-icon {
+  @extend .extension-icon-background;
+  position: relative;
+  display: inline-block;
+  width: (4 / 3) * 1em;
+  line-height: 1em;
+  &:before {
+    content: '\00a0';
+  }
+}
+
+@mixin extension-icon($ext) {
+  .extension-icon-#{$ext} {
+    background-image: url(#{$extension-icon-path}#{$extension-icon-svg-path}/#{$ext}.svg);
+  }
+}

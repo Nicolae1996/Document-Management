@@ -1,0 +1,67 @@
+﻿<!-- START WIDGETS -->
+<div class="row">
+    <div class="col-md-3">
+
+        <!-- START WIDGET MESSAGES -->
+        <div class="widget widget-default widget-item-icon" onclick="location.href='pages-messages.html';">
+            <div class="widget-item-left">
+                <span class="fa fa-envelope"></span>
+            </div>
+            <div class="widget-data">
+                <div class="widget-int num-count">48</div>
+                <div class="widget-title">New messages</div>
+                <div class="widget-subtitle">In your mailbox</div>
+            </div>
+            <div class="widget-controls">
+                <a class="widget-control-right widget-remove" data-toggle="tooltip" data-placement="top" title="Remove Widget"><span class="fa fa-times"></span></a>
+            </div>
+        </div>
+        <!-- END WIDGET MESSAGES -->
+
+    </div>
+    <div class="col-md-3">
+
+        <!-- START WIDGET REGISTRED -->
+        <div class="widget widget-default widget-item-icon">
+            <div class="widget-item-left">
+                <span class="fa fa-user"></span>
+            </div>
+            <div class="widget-data">
+                <div class="widget-int num-count">375</div>
+                <div class="widget-title">Registred users</div>
+                <div class="widget-subtitle">On your website</div>
+            </div>
+            <div class="widget-controls">
+                <a class="widget-control-right widget-remove" data-toggle="tooltip" data-placement="top" title="Remove Widget"><span class="fa fa-times"></span></a>
+            </div>
+        </div>
+        <!-- END WIDGET REGISTRED -->
+
+    </div>
+</div>
+<!-- END WIDGETS -->
+<!-- SETTINGS WIDGET -->
+<div class="col-md-4">
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span class="fa fa-cogs"></span> Settings</h3>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label class="col-md-4 control-label text-left">Menu Mode</label>
+                <div class="col-md-3">
+                    <label class="switch">
+                    <input type="checkbox" class="switch"  [attr.checked]="mode ? 'checked' : null" (change)="onMenuModeChange($event)"/>
+                        <span></span>
+                    </label>
+                </div>
+                <div class="col-md-5">
+                    <span class="help-block">horizontal menu?</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- END SETTINGS WIDGET -->

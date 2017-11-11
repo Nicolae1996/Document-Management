@@ -1,0 +1,4 @@
+.printnone, .sel , .button-group, input
+{
+    display: none;
+}

@@ -1,0 +1,78 @@
+<!-- START CONTENT FRAME -->
+<div class="content-frame">
+
+  <!-- START CONTENT FRAME TOP -->
+  <div class="content-frame-top">
+    <div class="page-title">
+      <h2><span class="fa fa-arrow-circle-o-left"></span> Documents Mangement</h2>
+    </div>
+    <div class="pull-right">
+      <button class="btn btn-default content-frame-left-toggle"><span class="fa fa-bars"></span></button>
+    </div>
+  </div>
+  <!-- END CONTENT FRAME TOP -->
+
+  <!-- START CONTENT FRAME LEFT -->
+  <div class="content-frame-left" style="overflow:auto; background: white;">
+    <div>
+      <div class="panel-body">
+        <h3 class="push-up-0">File Tree</h3>
+        <div class="tree-container">
+          <tree [tree]="dataTree" (nodeRemoved)="onNodeRemoved($event)" (nodeRenamed)="onNodeRenamed($event)" (nodeSelected)="onNodeSelected($event)"
+            (nodeMoved)="onNodeMoved($event)" (nodeCreated)="onNodeCreated($event)" (nodeExpanded)="onNodeExpanded($event)"
+            (nodeCollapsed)="onNodeCollapsed($event)">
+          </tree>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END CONTENT FRAME LEFT -->
+
+  <!-- START CONTENT FRAME BODY -->
+  <div class="content-frame-body">
+    <div class="panel panel-default">
+      <div class="panel-body" style="overflow-y: auto">
+
+        <!--Actions-->
+        <div class="row">
+
+          <!-- START MODALS -->
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Actions</h3>
+            </div>
+            <div class="panel-body">
+              <button class="btn btn-danger" (click)="deleteFolder()"><span class="glyphicon glyphicon-floppy-remove"></span>Stergere Dosar</button>
+              <button class="btn btn-primary" onclick="javascript: location.reload()"><span class="fa fa-undo"></span>Reincarca</button>
+            </div>
+          </div>
+          <!-- END MODALS -->
+
+        </div>
+        <!--End Actions-->
+
+
+        <!--Tabs-->
+        <div class="row" style="margin-top: 2em">
+          <tabs>
+            <tab tabTitle="Detalii">
+              <table-dinamic [options]="options"></table-dinamic>
+            </tab>
+            <tab tabTitle="Cuvinte Cheie">
+
+            </tab>
+            <tab tabTitle="Actiuni">
+
+            </tab>
+          </tabs>
+          <!--End Tabs-->
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END CONTENT FRAME BODY -->
+</div>
+<!-- END CONTENT FRAME -->

@@ -1,0 +1,15 @@
+<!--Title of page-->
+<app-title [title]="'Edit Key'" [type]="'edit'"></app-title>
+<!--End title of page-->
+
+<!--Errors-->
+<appc-error-summary [errors]="errors"></appc-error-summary>
+<!--end Errors-->
+
+<!--Form create template-->
+<appc-dynamic-form (formsubmit)="update($event)" [name]="'Language key'" [controls]="controls" [btnText]="'Update'"></appc-dynamic-form>
+<!--End Form create template-->
+
+<!--Info modals -->
+<info-modals></info-modals>
+<!--End info modals-->

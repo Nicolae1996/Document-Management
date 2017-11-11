@@ -1,0 +1,135 @@
+<!-- START BORDERED TABLE SAMPLE -->
+<div class="panel panel-default panel-customs-margin">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ options.tableTitle }}</h3>
+    </div>
+    <div class="panel-body">
+        <div class="button-group pull-left">
+            <button *ngIf="options.actions.create" class="btn btn-primary active" routerLinkActive="active-link" (click)="redirect()">
+            <i class="fa fa-plus" aria-hidden="true"></i>Create New
+            </button>
+            <button *ngIf="options.allowPrint" (click)="print()" class="btn btn-default"><span class="glyphicon glyphicon-print"></span>Print Page</button>
+        </div>
+
+        <!--Search for all columns-->
+        <div *ngIf="options.filters.allowSearchGlobal" class="input-group push-down-15 pull-right col-md-4" style="padding-top:1em;">
+            <span class="input-group-addon"><span class="fa fa-search"></span></span>
+            <input [(ngModel)]="search" id="globalsearch" type="text" class="form-control" placeholder="Search..." (keypress)="SearchGlobal($event)"
+            />
+            <div class="input-group-btn">
+                <button class="btn btn-primary">Search</button>
+            </div>
+        </div>
+        <!--End search for columns-->
+    </div>
+    <div class="panel-body panel-body-table">
+        <!--Items per page-->
+        <div *ngIf="totalItems >0  && options.allowPagination" class="form-group pull-left">
+            <label class="col-md-6 control-label">Per page:  </label>
+            <div class="col-md-6">
+                <select id="itemspage" class="form-control" (change)="onPerPageChange($event)">
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="30">30</option>
+                    <option value="50">50</option>              
+                </select>
+            </div>
+        </div>
+        <!--End items per page-->
+        <table class="table table-bordered" *ngIf="options.tableKeys != null">
+            <thead>
+                <!--For all columns search-->
+                <tr *ngIf="options.filters.allColumnsAllowSearch">
+                    <th></th>
+                    <th *ngFor="let col of options.tableColumns">
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" placeholder="Cauta dupa {{ col }}" />
+                        </div>
+                    </th>
+                    <th></th>
+                </tr>
+                <!--For custom serach column search-->
+                <tr *ngIf="options.filters.columnsAllowSearch.length > 0 && options.filters.allColumnsAllowSearch==false">
+                    <th></th>
+                    <th *ngFor="let col of options.tableColumns; let i = index;">
+                        <div class="col-md-12" *ngIf="options.filters.columnsAllowSearch.indexOf(i+1) > -1">
+                            <input type="text" class="form-control" placeholder="Cauta dupa {{ col }}" />
+                        </div>
+                    </th>
+                    <th></th>
+                </tr>
+                <tr id="sort-table">
+                    <th>#</th>
+                    <th *ngFor="let col of options.tableKeys; let i = index">
+                        <span *ngIf="options.filters.allColumnsAllowSort || options.filters.columnsAllowSort.indexOf(i+1) > -1" id="init{{ col }}"
+                            class="fa fa-sort" (click)="sort(true, col)"></span>
+
+                        <span *ngIf="options.filters.allColumnsAllowSort || options.filters.columnsAllowSort.indexOf(i+1) > -1" id="desc{{col}}"
+                            class="fa fa-sort-desc sel" (click)="sort(false, col)"></span>
+
+                        <span *ngIf="options.filters.allColumnsAllowSort || options.filters.columnsAllowSort.indexOf(i+1) > -1" id="asc{{col}}" class="fa fa-sort-up sel"
+                            (click)="sort(true, col)"></span> {{ options.tableColumns[i] }}
+                    </th>
+                    <th *ngIf="options.actions.allowActionsColumn" class="printnone">Actions</th>
+                </tr>
+            </thead>
+            <tbody id="print-section">
+                <tr class="custom-container" *ngIf="tableLoaded">
+                    <div class="table-loader"></div>
+                </tr>
+                <ng-container *ngIf="!tableLoaded">
+                    <tr *ngFor="let row of tableRows; let i = index">
+                        <td>{{ enumerate - pagesize + 1 + i}}</td>
+                        <td *ngFor="let elem of options.tableKeys"> {{ row[elem] }}</td>
+                        <td *ngIf="options.actions.allowActionsColumn" class="printnone">
+                            <div class="button-group">
+                                <a *ngIf="options.actions.edit" class="btn btn-warning" (click)="edit(row[options.identifier])"><i class='glyphicon glyphicon-pencil'></i>Edit</a>
+                                <a *ngIf="options.actions.delete" (click)="fordelete(row[options.identifier])" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i>Delete</a>
+                                <a *ngFor="let button of options.actions.newButtons" class="btn btn-{{button.className}}"><i class="{{button.icon}}"></i>{{button.name}}</a>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+        <div class="alert alert-danger" role="alert" *ngIf="noitems">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <strong>Info!</strong> No data to show.
+        </div>
+        <div *ngIf="totalItems >0  && options.allowPagination" class="pull-right">
+            <ng-pagination [totalItems]="totalItems" [(ngModel)]="currentPage" [maxSize]="pagesize" (pageChanged)="pageChanged($event)"
+                previous-text="&lsaquo;" next-text="&rsaquo;" first-text="First" last-text="Last"></ng-pagination>
+        </div>
+
+        <!--Show current page of total-->
+        <div *ngIf="options.allowPagination" class="col-md-4 pull-left" style="padding: 1em">
+            Pagina <strong>{{currentPage}}</strong> din <strong>{{totalpages}}</strong>
+        </div>
+        <!--End show current page of total-->
+
+    </div>
+</div>
+<!-- END BORDERED TABLE SAMPLE -->
+
+<!-- danger -->
+<div class="message-box message-box-danger animated fadeIn" id="message-box-danger">
+    <div class="mb-container">
+        <div class="mb-middle">
+            <div class="mb-title"><span class="fa fa-times"></span> Doriti sa stergeti inregistrarea?</div>
+            <div class="mb-content">
+                <p>message optional</p>
+            </div>
+            <div class="mb-footer">
+                <div class="pull-right">
+                    <a (click)="deleteItem()" class="btn btn-default btn-lg mb-control-close">Yes</a>
+                    <a class="btn btn-default btn-lg mb-control-close" routerLink="['/parti/edit', 1]">No</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end danger -->
+
+<!--Info modals -->
+<info-modals></info-modals>
+<!--End info modals-->

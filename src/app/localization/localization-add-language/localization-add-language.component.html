@@ -1,0 +1,15 @@
+<!--Title of page-->
+<app-title [title]="'Add language'" [type]="'create'"></app-title>
+<!--End title of page-->
+
+<!--Errors-->
+<appc-error-summary [errors]="errors"></appc-error-summary>
+<!--end Errors-->
+
+<!--Form create template-->
+<appc-dynamic-form (formsubmit)="create($event)" [name]="'Localization language'" [controls]="controls" [btnText]="'Create'"></appc-dynamic-form>
+<!--End Form create template-->
+
+<!--Info modals -->
+<info-modals></info-modals>
+<!--End info modals-->
